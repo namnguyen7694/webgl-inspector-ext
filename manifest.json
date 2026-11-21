@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "WebGL & Three.js Perf Inspector",
+  "version": "1.0.0",
+  "description": "Đo thông số render WebGL (Draw Calls, Triangles, VRAM) và traverse Three.js Scene.",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_title": "Bật/Tắt WebGL Perf HUD"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["inject.js"],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "world": "ISOLATED",
+      "run_at": "document_idle"
+    }
+  ]
+}
